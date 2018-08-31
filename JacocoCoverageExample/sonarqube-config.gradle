@@ -1,0 +1,30 @@
+apply plugin: 'org.sonarqube'
+//SonarQube configuration.
+sonarqube {
+    def flavorName = ''
+    if (project.hasProperty('flavor')) {
+        //read the flavor from properties.
+        flavorName = flavor
+        androidVariant flavorName + "Debug"
+    } else {
+        androidVariant 'debug'
+    }
+    properties {
+        property 'sonar.host.url', 'http://localhost:9000'
+        property "sonar.projectName", "JacocoCoverageExampleApp"
+        property "sonar.projectKey", "jonceski.kliment.jacococoverageexample"
+        property 'sonar.java.source', '8'
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property "sonar.language", "java"
+        property "sonar.login", "admin"
+        property "sonar.password", "admin"
+
+        property 'sonar.java.binaries', 'build/intermediates/classes/' + flavorName + "/debug"
+        property 'sonar.java.test.binaries', 'build/intermediates/classes/' + flavorName + "/debug"
+        property 'sonar.junit.reportsPath', 'build/test-results/test' + flavorName.capitalize() +'DebugUnitTest'
+        property 'sonar.jacoco.reportPath', fileTree(dir: project.projectDir, includes: ['**/*.exec'])
+        property 'sonar.jacoco.itReportPath', fileTree(dir: project.projectDir, includes: ['**/*.ec'])
+        property 'sonar.java.coveragePlugin', 'jacoco'
+        property 'sonar.exclusions', '**/*.js,**/*.css,**/*.html'
+    }
+}

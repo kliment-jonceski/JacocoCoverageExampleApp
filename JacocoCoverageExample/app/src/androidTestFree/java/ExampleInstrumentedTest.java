@@ -1,5 +1,3 @@
-package jonceski.kliment.jacococoverageexample;
-
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
@@ -21,6 +19,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("jonceski.kliment.jacococoverageexample", appContext.getPackageName());
+        assertEquals("jonceski.kliment.jacococoverageexample.free", appContext.getPackageName());
     }
 }
